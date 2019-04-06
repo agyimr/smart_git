@@ -18,10 +18,11 @@ Tap the search icon to see the results.
 ## Results
 - Invalid input - This happens when you forgot the slash
 - Something went wrong
-  - This can happen to many reasons. 
+  - This can happen due to
     - Too large repository
     - Non existing repository
     - Internet connection problems
+    - Backend is asleep and need to be woken up
 - Displays the tree with the commits.
 
 ## Data format
@@ -48,3 +49,7 @@ The order of the array is important, as it contains the commits in order, from t
 
 ### Remarks
 I was only able to test it on android. 
+The data crunching is done on a cloud function. After a long time of not hitting the endpoint, it falls asleep and will fail for the next time. So give it a few tries.
+Only works with public repositories!
+
+...quite amazing how much functionality can be squeezed into 5kb of code.
