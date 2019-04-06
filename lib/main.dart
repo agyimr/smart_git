@@ -40,13 +40,13 @@ class OpenPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter c) => false;
+  shouldRepaint(CustomPainter c) => false;
 
-  Color getColor(String s) {
+  getColor(String s) {
     return Color(int.parse(s, radix: 16));
   }
 
-  Paint dim(double pos, Paint paint) {
+  dim(double pos, Paint paint) {
     if (pos > width) paint.color = paint.color.withOpacity(0.3);
     return paint;
   }
@@ -83,7 +83,7 @@ class OpenPainter extends CustomPainter {
   }
 
   @override
-  void paint(Canvas canvas, Size s) {
+  paint(Canvas canvas, Size s) {
     var paint = Paint()
       ..strokeWidth = 3;
 
@@ -96,11 +96,6 @@ class OpenPainter extends CustomPainter {
     canvas.save();
     canvas.restore();
   }
-}
-
-class Main extends StatefulWidget {
-  @override
-  _App createState() => _App();
 }
 
 class _App extends State<Main> {
@@ -127,7 +122,7 @@ class _App extends State<Main> {
     } else setState(() { _commits = []; _msg = 'Something went wrong...'; _loading = false; });
   }
 
-  Widget _buildLine(BuildContext ctx, Commit commit) {
+  _buildLine(BuildContext ctx, Commit commit) {
     var height = 40.0;
     var maxWidth = MediaQuery.of(ctx).size.width;
     var paintWidth = maxWidth * 0.3;
@@ -149,7 +144,7 @@ class _App extends State<Main> {
   }
 
   @override
-  Widget build(BuildContext ctx) {
+  build(BuildContext ctx) {
     return MaterialApp(
       theme: ThemeData.dark(),
       home: Scaffold(
@@ -173,4 +168,5 @@ class _App extends State<Main> {
   }
 }
 
+class Main extends StatefulWidget { createState() => _App(); }
 void main() => runApp(Main());
