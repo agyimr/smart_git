@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import './config.dart';
 
 class Route {
   int to, from;
@@ -116,8 +117,7 @@ class _App extends State<Main> {
     }
     setState(() { _loading = true; });
 
-    var resp = await http.get(
-        'https://us-central1-gittrans.cloudfunctions.net/git?repo=$repo');
+    var resp = await http.get('$apiUrl?repo=$repo');
     if (resp.statusCode == 200) {
       _commits = (json.decode(resp.body) as List)
         .map((c) => Commit.fromJson(c))

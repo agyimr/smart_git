@@ -1,16 +1,50 @@
-# smart_git
+# Smart git
 
-A new Flutter project.
+This application visualizes a repository and displays commit messages with it. The data is extracted from github through their API. Since they do not provide an easy endpoint to build up a tree, all the data crunching has been carried out on the backend. This also mimics the real life scenario, since we do not want to make a bunch of request on the user's phone just to make a tree. 
 
-## Getting Started
+![](demo1.gif) ![](demo2.gif)
+## How does it work?
 
-This project is a starting point for a Flutter application.
+Type in a github repository name in the following way:
+```
+owner/name
+```
+So in the case of a repository called '*demonstration*' which belongs to the user '*justfor*' it would be:
+```
+justfor/demonstration
+```
+Tap the search icon to see the results. 
 
-A few resources to get you started if this is your first Flutter project:
+## Results
+- Invalid input - This happens when you forgot the slash
+- Something went wrong
+  - This can happen to many reasons. 
+    - Too large repository
+    - Non existing repository
+    - Internet connection problems
+- Displays the tree with the commits.
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+## Data format
+To be able to reproduce these visualizations, I provide the format the backend sends to visualize the tree. 
+```json
+[
+  {
+    "x": "x position of the commit in the grid",
+    "message": "commit message",
+    "color": "color of the commit",
+    "routes": [
+      {
+        "from": "The beginning of a route on this level of the tree",
+        "to": "The end of a route on this level of the tree",
+        "color": "The color of the current route"
+      }
+      ...
+    ]
+  }
+  ...
+]
+```
+The order of the array is important, as it contains the commits in order, from the bottom to the top.
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+### Remarks
+I was only able to test it on android. 
